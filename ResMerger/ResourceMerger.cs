@@ -201,7 +201,10 @@ namespace ResMerger
 
             // call PrepareDocuments() for each merged dictionary
             foreach (var dict in doc.Root.Descendants(defaultNameSpace + resDictString))
-                PrepareDocuments(ref documents, projectPath, projectName, dict.Attribute("Source").Value.Replace("/" + projectName + ";component/", string.Empty), false, documents[absoluteSourceFilePath].DependencyCount);
+            {
+                if (dict.Attribute("Source") != null)
+                    PrepareDocuments(ref documents, projectPath, projectName, dict.Attribute("Source").Value.Replace("/" + projectName + ";component/", string.Empty), false, documents[absoluteSourceFilePath].DependencyCount);
+            }
         }
     }
 }
